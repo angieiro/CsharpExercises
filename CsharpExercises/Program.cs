@@ -17,21 +17,22 @@ namespace CsharpExercises
 
             /*Exercise2 ex2 = new Exercise2();
             ex2.Run();
-            Console.ReadKey();
             */
 
             /*Exercise3 ex3 = new Exercise3();
             ex3.Run();
-            Console.ReadKey();
             */
 
             /*Exercise4 ex4 = new Exercise4();
             ex4.Run();
-            Console.ReadKey();
             */
 
-            Exercise5 ex5 = new Exercise5();
+            /*Exercise5 ex5 = new Exercise5();
             ex5.Run();
+            */
+
+            Exercise6 ex6 = new Exercise6();
+            ex6.Run();
             Console.ReadKey();
         }
     }
@@ -169,10 +170,32 @@ namespace CsharpExercises
         {
             String user_input;
             //Ζητάμε από τον χρήστη να εισάγει το ΑΦΜ προς έλεγχο
-            Console.WriteLine("Enter Tax Identification Number: ");
-            // mpla mpla mpla
+            Console.WriteLine("Enter Tax Identification Number: ");            
             user_input = Console.ReadLine();
+            
+            //remove the check digit from the array
+            int check_digit = Int32.Parse(user_input.Substring(user_input.Length - 1, 1));
+            user_input = user_input.Substring(0, user_input.Length - 1);
+
+            //Μετατροπή του string που παίρνουμε ως δεδομένα εισόδου σε ένα μονοδιάστατο πίνακα τύπου char
             char[] afm = user_input.ToCharArray();
+            int sum = 0;
+            Array.Reverse(afm);
+            Console.WriteLine(afm);
+            int digit;
+            for (int i = 0; i < afm.Length; i++)
+            {
+                digit = (int)Char.GetNumericValue(afm[i]);
+                sum +=  digit * (int)(Math.Pow(2, i + 1));
+            }
+
+            if (((sum % 11) % 10 ) == check_digit) 
+            {
+                Console.WriteLine("Tax Identification Number valid.");
+            } else
+            {
+                Console.WriteLine("Tax Identification Number not valid.");
+            }
         }
     }
 
