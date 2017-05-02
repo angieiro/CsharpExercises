@@ -199,5 +199,13 @@ namespace CsharpExercises
         }
     }
 
+    class Exercise7
+    {
+        public void Run()
+        {
+
+        }
+    }
+
 
 }
